@@ -3,77 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bagus || CDN</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Portofolio Pribadi</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        #result a {
-            display: inline-block;
-            max-width: 100%;
-            word-break: break-word;
-            overflow-wrap: break-word;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500">
-    <div class="bg-white shadow-lg rounded-xl p-6 max-w-lg w-full text-center">
-        <h1 class="text-2xl font-bold text-gray-900">Bagus Uploader</h1>
-        <p class="text-gray-600 mb-4">Website uploader to URL</p>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Portofolio</h1>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="help-button">Help</button>
+        </div>
+    </nav>
 
-        <label for="fileInput" id="dropZone" class="mt-6 border-2 border-dashed border-gray-400 rounded-lg p-10 cursor-pointer hover:bg-gray-200 transition block">
-            <p id="dropText" class="text-gray-700">Tekan untuk memilih</p>
-            <input type="file" id="fileInput" name="file" hidden>
-        </label>
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Selamat Datang di Portofolio Saya</h2>
+            <p>Saya adalah seorang kreator yang bersemangat dan siap untuk berkolaborasi.</p>
+        </div>
+    </section>
 
-        <div id="result" class="mt-4 p-4 bg-gray-200 text-gray-800 rounded-lg shadow-sm hidden"></div>
+    <section id="about" class="about" data-aos="fade-up">
+        <div class="container">
+            <h2>Tentang Saya</h2>
+            <p>Saya adalah seorang pengembang web dengan pengalaman dalam berbagai teknologi. Saya mencintai desain dan pengembangan yang bersih dan fungsional.</p>
+        </div>
+    </section>
 
-        <footer class="mt-6 text-gray-600 text-sm">&copy; Edwin Uploader || 2025</footer>
-    </div>
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Proyek Saya</h2>
+            <div class="project-list">
+                <div class="project-card" data-aos="fade-up">
+                    <h3>Proyek 1</h3>
+                    <p>Deskripsi proyek 1.</p>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <h3>Proyek 2</h3>
+                    <p>Deskripsi proyek 2.</p>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <h3>Proyek 3</h3>
+                    <p>Deskripsi proyek 3.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        document.getElementById('fileInput').addEventListener('change', function() {
-            let file = this.files[0];
-            if (file) {
-                if (file.size > 3 * 1024 * 1024) { // Cek batas 3MB
-                    document.getElementById('result').innerHTML = `<p class="text-red-600 font-semibold">Ukuran file terlalu besar! Maks 3MB.</p>`;
-                    document.getElementById('result').classList.remove('hidden');
-                    return;
-                }
+    <section id="contact" class="contact" data-aos="fade-up">
+        <div class="container">
+            <h2>Kontak Saya</h2>
+            <form>
+                <input type="text" placeholder="Nama" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Pesan" required></textarea>
+                <button type="submit">Kirim</button>
+            </form>
+        </div>
+    </section>
 
-                let formData = new FormData();
-                formData.append('file', file);
-
-                fetch('/upload', { method: 'POST', body: formData })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        document.getElementById('result').innerHTML = 
-                            `<p class="text-green-600 font-semibold">Upload berhasil!</p>
-                            <p class="mt-2">Link file: <a href="${data.fileUrl}" target="_blank" class="text-blue-600 underline">${data.fileUrl}</a></p>
-                            <img src="${data.fileUrl}" alt="Uploaded File" class="mt-2 max-w-full h-auto" />`;
-                        document.getElementById('result').classList.remove('hidden');
-                    } else {
-                        document.getElementById('result').innerHTML = 
-                            `<p class="text-red-600 font-semibold">${data.message}</p>`;
-                        document.getElementById('result').classList.remove('hidden');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('result').innerHTML = 
-                        `<p class="text-red-600 font-semibold">Terjadi kesalahan saat mengupload file: ${error.message}</p>`;
-                    document.getElementById('result').classList.remove('hidden');
-                });
-            }
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
