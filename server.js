@@ -22,15 +22,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
     // Simulasi URL file yang diupload
     const fileName = req.file.originalname; // Menggunakan nama asli file
-    const fileUrl = `https://edwin-uploader.vercel.app/files/${fileName}`; // Ganti dengan domain Anda
+    const fileUrl = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`; // Mengembalikan file sebagai data base64
     res.json({ status: 'success', fileUrl: fileUrl });
-});
-
-// Menyajikan file statis dari folder files
-app.get('/files/:filename', (req, res) => {
-    const fileName = req.params.filename;
-    const filePath = path.join(__dirname, 'uploads', fileName);
-    res.download(filePath); // Mengunduh file
 });
 
 // Menjalankan server
