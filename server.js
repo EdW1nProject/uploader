@@ -34,7 +34,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ status: 'error', message: 'Tidak ada file yang diupload.' });
     }
-    const fileUrl = `https://your-vercel-url.vercel.app/uploads/${req.file.filename}`;
+    const fileUrl = `https://edwin-uploader.vercel.app/uploads/${req.file.filename}`;
     res.json({ status: 'success', fileUrl: fileUrl });
 });
 
