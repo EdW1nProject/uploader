@@ -57,7 +57,8 @@
                     if (data.status === 'success') {
                         document.getElementById('result').innerHTML = 
                             `<p class="text-green-600 font-semibold">Upload berhasil!</p>
-                            <p class="mt-2">Link file: <a href="${data.fileUrl}" target="_blank" class="text-blue-600 underline">${data.fileUrl}</a></p>`;
+                            <p class="mt-2">Link file: <a href="${data.fileUrl}" target="_blank" class="text-blue-600 underline">${data.fileUrl}</a></p>
+                            <img src="${data.fileUrl}" alt="Uploaded File" class="mt-2 max-w-full h-auto" />`;
                         document.getElementById('result').classList.remove('hidden');
                     } else {
                         document.getElementById('result').innerHTML = 
