@@ -10,9 +10,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Menyajikan file HTML dari folder public
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Endpoint untuk mengupload file
 app.post('/upload', upload.single('file'), (req, res) => {
