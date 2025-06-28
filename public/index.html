@@ -47,14 +47,17 @@
                 formData.append('file', file);
 
                 fetch('/upload', { method: 'POST', body: formData })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (data.status === 'success') {
                         document.getElementById('result').innerHTML = 
                             `<p class="text-green-600 font-semibold">Upload berhasil!</p>
-                            <div class="bg-white p-2 rounded-md shadow">
-                                <a href="${data.fileUrl}" target="_blank" class="text-blue-600 underline">${data.fileUrl}</a>
-                            </div>`;
+                            <p class="mt-2">Link file: <a href="${data.fileUrl}" target="_blank" class="text-blue-600 underline">${data.fileUrl}</a></p>`;
                         document.getElementById('result').classList.remove('hidden');
                     } else {
                         document.getElementById('result').innerHTML = 
@@ -62,7 +65,12 @@
                         document.getElementById('result').classList.remove('hidden');
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerHTML = 
+                        `<p class="text-red-600 font-semibold">Terjadi kesalahan saat mengupload file: ${error.message}</p>`;
+                    document.getElementById('result').classList.remove('hidden');
+                });
             }
         });
     </script>
