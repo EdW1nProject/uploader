@@ -39,7 +39,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 // Menyajikan file statis dari folder uploads
-app.use('/uploads', express.static(uploadDir));
+app.use('/upload/uploads', express.static(uploadDir));
 
 app.listen(PORT, () => {
     console.log(`Server berjalan di http://localhost:${PORT}`);
